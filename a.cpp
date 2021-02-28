@@ -3,25 +3,36 @@
 #include <ctime>
 #include <iomanip>
 
-template < class Iterator >
-void shift( const Iterator& begin, const Iterator& end )  
+enum Direction
 {
-	if( begin == end )
-		return;
+	LEFT,
+	RIGHT
+}
 
-	auto temp = *begin;
-	if( end - 1 != begin )
+template < class Iterator >
+void shift( const Iterator& begin, 
+				const Iterator& end, 
+				Direction dir = LEFT )  
+{
+
+	if(    ( ( begin    ) == end ) 
+		 || ( ( begin -1 ) == end ) )
+	{
+		return;
+	}
+
+	if( dir == LEFT )
 	{
 		temp = *begin;	
+	
+		for( Iterator it = begin + 1; it != end; it++ )
+		{
+			*(it - 1) = *it;	
+		}
+
+   	*(end - 1) = temp;
 	}
 
-	for( Iterator it = begin + 1; it != end; it++ )
-	{
-		
-		*(it - 1) = *it;	
-	}
-
-   *(end - 1) = temp;
 }
 
 
