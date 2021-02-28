@@ -76,6 +76,33 @@ void show_vector( const std::vector<T> &values )
 	std::cout << std::endl;
 }
 
+template< typename T>
+void show_vector_with_shift( const std::vector<T> &values, 
+									  int                   shift_size,
+									  Direction             dir = LEFT  )
+{
+
+	// any direction of shift we can translate to positive shift
+	int positive_shift = (  dir == LEFT                 ) ?
+					         (  values.size() - shift_size  ) :
+					         (  shift_size                  );
+
+	for( int i    = positive_shift, 
+		      c_i  = 0,
+		      size = values.size(); i < size; i++ )
+	{
+		// current index, therefore we can't exceed borders of array
+		c_i = i % values.size();
+
+		std::cout 	<< std::setw(2) 
+						<< values[ c_i ] 
+						<< " ";
+	}
+
+	std::cout << std::endl;
+	
+}
+
 
 template< typename T>
 void show_vector_with_shift( const std::vector<T> &values, 
@@ -118,7 +145,10 @@ void new_line()
 	std::cout 	<< std::endl;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ce671a335faa4505b7a4ded9cb08618a03bd3041
 template< class T>
 void real_shift( std::vector<T> &values )
 {
@@ -148,7 +178,10 @@ void real_shift( std::vector<T> &values )
 
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ce671a335faa4505b7a4ded9cb08618a03bd3041
 template < class T >
 void fictive_shift( std::vector<T> &values )
 {
