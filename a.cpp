@@ -21,19 +21,17 @@ void shift( const Iterator& begin,
 	if(  ( begin -1 ) == end  )
 		return;
 
-	Iterator temp;	
-
 	if( dir == LEFT )
 	{
 
-		*temp = *begin;	
+		auto temp = *begin;	
 	
 		for( Iterator it = begin + 1; it != end; it++ )
 		{
 			*( it - 1 ) = *it;	
 		}
 
-   	*(end - 1) = *temp;
+   	*( end - 1 ) = temp;
 
 	}
 
@@ -41,13 +39,14 @@ void shift( const Iterator& begin,
 	if( dir == RIGHT )
 	{
 
-		*temp = *end;
+		auto temp = *( end - 1 );
 
 		for( Iterator it = end - 1; it != begin; it-- )
 		{
 			*it = *( it - 1 );
 		}
-		*begin = *temp;
+
+		*begin = temp;
 
 	}
 
@@ -77,6 +76,19 @@ void show_vector( const std::vector<T> &values )
 }
 
 
+void show_string( const std::string &str )
+{
+	std::cout 	<< std::endl
+					<< str
+					<< std::endl;
+}
+
+void new_line()
+{
+	std::cout 	<< std::endl;
+}
+
+
 int main()
 {
 	const size_t len = 10;
@@ -85,27 +97,30 @@ int main()
 
 	fill_array( values );
 
+
 /////////----LEFT_SHIFT----////////////////////////////
 
-	std::cout << "before LEFT shift: " << std::endl;
+	show_string( "before LEFT shift: " );
 	show_vector( values );
 
 	shift( values.begin(), values.end(), LEFT );
 
-
-	std::cout << "after LEFT shift: " << std::endl;
+	show_string( "after LEFT shift: " );
 	show_vector( values );
+
 
 /////////----RIGHT_SHIFT----//////////////////////////
 
-	std::cout << "before RIGHT shift: " << std::endl;
+	show_string( "before RIGHT shift: " );
 	show_vector( values );
-	
+
 	shift( values.begin(), values.end(), RIGHT );
-	
-	std::cout << "after RIGHT shift: " << std::endl;
+
+   show_string( "after RIGHT shift: " );
 	show_vector( values );
-	
+
+	new_line();
+
 	return 0;
 }
 
