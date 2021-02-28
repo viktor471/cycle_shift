@@ -4,7 +4,7 @@
 #include <iomanip>
 
 template < class Iterator >
-void shift( Iterator&& begin, Iterator&& end )  
+void shift( const Iterator& begin, const Iterator& end )  
 {
 	if( begin == end )
 		return;
