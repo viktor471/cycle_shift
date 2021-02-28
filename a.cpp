@@ -12,15 +12,16 @@ void shift( const Iterator& begin, const Iterator& end )
 	auto temp = *begin;
 	if( end - 1 != begin )
 	{
-		temp = *(end - 1);	
+		temp = *begin;	
 	}
 
-	for( Iterator it = end - 1; it != begin; it-- )
+	for( Iterator it = begin + 1; it != end; it++ )
 	{
+		
 		*(it - 1) = *it;	
 	}
 
-   *begin = temp;
+   *(end - 1) = temp;
 }
 
 
