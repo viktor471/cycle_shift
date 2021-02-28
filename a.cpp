@@ -9,6 +9,7 @@ enum Direction
 	RIGHT
 };
 
+
 template < class Iterator >
 void shift( const Iterator& begin, 
 				const Iterator& end, 
@@ -76,6 +77,34 @@ void show_vector( const std::vector<T> &values )
 }
 
 
+template< typename T>
+void show_vector_with_shift( const std::vector<T> &values, 
+									  int                   shift_size,
+									  Direction             dir = LEFT  )
+{
+
+	// any direction of shift we can translate to positive shift
+	int positive_shift = (  dir == LEFT                 ) ?
+					         (  values.size() - shift_size  ) :
+					         (  shift_size                  );
+
+	for( int i    = positive_shift, 
+		      c_i  = 0,
+		      size = values.size(); i < size; i++ )
+	{
+		// current index, therefore we can't exceed borders of array
+		c_i = i % values.size();
+
+		std::cout 	<< std::setw(2) 
+						<< values[ c_i ] 
+						<< " ";
+	}
+
+	std::cout << std::endl;
+	
+}
+
+
 void show_string( const std::string &str )
 {
 	std::cout 	<< std::endl
@@ -83,20 +112,16 @@ void show_string( const std::string &str )
 					<< std::endl;
 }
 
+
 void new_line()
 {
 	std::cout 	<< std::endl;
 }
 
 
-int main()
+template< class T>
+void real_shift( std::vector<T> &values )
 {
-	const size_t len = 10;
-
-	std::vector<int> values( len );
-
-	fill_array( values );
-
 
 /////////----LEFT_SHIFT----////////////////////////////
 
@@ -120,6 +145,52 @@ int main()
 	show_vector( values );
 
 	new_line();
+
+}
+
+
+template < class T >
+void fictive_shift( std::vector<T> &values )
+{
+
+	int shift_size = 3;
+/////////----LEFT_SHIFT----////////////////////////////
+
+	
+	show_string( "before LEFT shift: " );
+	show_vector( values );
+   show_vector_with_shift( values, shift_size, LEFT );
+
+
+/////////----RIGHT_SHIFT----//////////////////////////
+
+	show_string( "before RIGHT shift: " );
+	show_vector( values );
+	show_vector_with_shift( values, shift_size, RIGHT );
+	
+	new_line();
+
+}
+
+
+int main()
+{
+	const size_t len = 10;
+
+	std::vector<int> values( len );
+
+	fill_array( values );
+
+	bool first_variant = false;
+
+	if( first_variant == false )
+	{
+		real_shift   ( values );
+	}
+	else
+	{
+		fictive_shift( values );
+	}
 
 	return 0;
 }
